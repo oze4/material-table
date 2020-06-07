@@ -187,6 +187,7 @@ export default class MaterialTable extends React.Component {
           icon: calculatedProps.icons.Edit,
           tooltip: localization.editTooltip,
           disabled: calculatedProps.editable.isEditable && !calculatedProps.editable.isEditable(rowData),
+          hidden: calculatedProps.editable.isEditHidden && calculatedProps.editable.isEditHidden(rowData),
           onClick: (e, rowData) => {
             this.dataManager.changeRowEditing(rowData, "update");
             this.setState({
@@ -201,6 +202,7 @@ export default class MaterialTable extends React.Component {
           icon: calculatedProps.icons.Delete,
           tooltip: localization.deleteTooltip,
           disabled: calculatedProps.editable.isDeletable && !calculatedProps.editable.isDeletable(rowData),
+          hidden: calculatedProps.editable.isDeleteHidden && calculatedProps.editable.isDeleteHidden(rowData),
           onClick: (e, rowData) => {
             this.dataManager.changeRowEditing(rowData, "delete");
             this.setState({
@@ -387,12 +389,19 @@ export default class MaterialTable extends React.Component {
 
   onEditingCanceled = (mode, rowData) => {
     if (mode === "add") {
+      this.props.editable.onRowAddCancelled && this.props.editable.onRowAddCancelled();
       this.setState({ showAddRow: false });
     }
-    else if (mode === "update" || mode === "delete") {
+    else if(mode === "update") {
+      this.props.editable.onRowUpdateCancelled && this.props.editable.onRowUpdateCancelled();
       this.dataManager.changeRowEditing(rowData);
       this.setState(this.dataManager.getRenderState());
     }
+    else if(mode === "delete") {
+      this.dataManager.changeRowEditing(rowData);
+      this.setState(this.dataManager.getRenderState());
+    }
+
   }
 
   onQueryChange = (query, callback) => {
