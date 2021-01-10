@@ -8,7 +8,7 @@ import {
   TimePicker,
 } from '@material-ui/pickers';
 
-export default function DataTypeFilter({
+export default function DateFilter({
   columnDef,
   onFilterChanged,
   localization,
