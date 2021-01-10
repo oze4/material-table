@@ -8,7 +8,7 @@ import MTableCell from './m-table-cell';
 import MTableEditCell from './m-table-edit-cell';
 import MTableEditRow from './m-table-edit-row';
 import MTableEditField from './m-table-edit-field';
-import MTableFilterRow from './m-table-filter-row';
+import MTableFilterRow from './MTableFilterRow';
 import MTableHeader from './m-table-header';
 import MTablePagination from './m-table-pagination';
 import MTableSteppedPagination from './m-table-stepped-pagination';
